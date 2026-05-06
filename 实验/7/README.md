@@ -17,7 +17,7 @@ Router0 -> Router1(NAT) -> Router3
 Router3 -> Switch2 -> PC4/PC5
 ```
 
-![](assets/exp07-flow.svg)
+![](assets/exp07-flow.png)
 
 Packet Tracer 拓扑截图：
 
