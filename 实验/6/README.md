@@ -5,6 +5,8 @@
 ## 文件
 
 - [6.pkt](<6.pkt>)：Packet Tracer 拓扑文件
+- [6.1.pkt](<6.1.pkt>)：补充拓扑或实验过程版本
+- [课件](<映射法扩充地址空间 NAT网络地址转换实验.pptx>)：NAT 网络地址转换实验要求
 - [assets](<assets/>)：拓扑、接口地址、NAT 配置和验证截图，共 16 张
 
 ## 拓扑
@@ -52,9 +54,34 @@ ip nat inside source static 192.168.19.1 174.1.1.1
 
 如果实验要求多个内网地址共享一个公网地址，通常使用 PAT/overload；如果是一对一映射，则每台内网主机配置不同的 inside global 地址。
 
+PAT/overload 示例：
+
+```bash
+access-list 1 permit 192.168.19.0 0.0.0.255
+access-list 1 permit 192.168.20.0 0.0.0.255
+
+interface fa0/0
+ip nat inside
+exit
+
+interface fa0/1
+ip nat outside
+exit
+
+ip nat inside source list 1 interface fa0/1 overload
+```
+
 ## 验证
 
 1. 私网主机访问公网或对端网络后，查看 `show ip nat translations`。
 2. 如果路由可达但 NAT 不生效，优先检查 inside/outside 是否配反。
 3. 如果 NAT 表有记录但端到端不通，检查公网段和回程路由。
 4. 截图中的 PDU 结果显示成功和失败并存，说明 NAT、路由或访问策略需要分别定位。
+
+## 排错顺序
+
+1. `show ip interface brief` 确认 inside/outside 两侧接口 up/up。
+2. `show ip route` 确认公网方向和回程方向都有路由。
+3. `show running-config` 检查 `ip nat inside`、`ip nat outside` 和转换规则。
+4. 从内网主机发起 ping 后再看 `show ip nat translations`，确认是否产生转换记录。
+5. 如果有 ACL，先确认 ACL 没有提前拒绝 NAT 匹配流量。

@@ -64,3 +64,10 @@ exit
 2. 同 VLAN 主机互 ping 应成功。
 3. 不同 VLAN 主机互 ping 应失败，除非后续实验引入三层路由。
 4. 如果跨交换机同 VLAN 不通，优先检查交换机互联口是否为 trunk。
+
+## 报告截图建议
+
+1. 星型或树型拓扑总览。
+2. `show vlan brief` 的 VLAN 与端口归属。
+3. trunk 端口配置或 `show interfaces trunk` 结果。
+4. 同 VLAN ping 成功、不同 VLAN ping 失败的验证结果。

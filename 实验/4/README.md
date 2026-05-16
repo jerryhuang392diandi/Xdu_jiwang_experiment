@@ -53,3 +53,11 @@ exit
 2. 左右两侧主机互通前，需要确认中间路由器的路由表完整。
 3. `show interfaces trunk` 检查交换机上联口。
 4. `show ip interface brief` 检查路由器子接口是否 up。
+
+## 报告截图建议
+
+1. 拓扑总览和 VLAN/网关标注。
+2. 交换机 access、trunk 配置或状态。
+3. 路由器物理接口和子接口配置。
+4. 中间路由器路由表。
+5. 跨 VLAN、跨路由器 ping 成功结果。

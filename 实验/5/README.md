@@ -4,7 +4,7 @@
 
 ## 文件
 
-- [5..pkt](<5..pkt>)：Packet Tracer 拓扑文件
+- [5.pkt](<5.pkt>)：Packet Tracer 拓扑文件
 - [课件](<计算机网络实验5   DHCP地址获取实验.ppt>)：DHCP 地址获取实验要求
 - [assets](<assets/>)：拓扑、DHCP 配置和地址获取截图，共 14 张
 
@@ -37,6 +37,8 @@ exit
 ```
 
 不同 VLAN 要分别创建地址池，`default-router` 必须写该 VLAN 的网关地址。
+
+注意：`excluded-address` 建议先写在地址池外，避免网关地址被分配给 PC。跨路由器或跨 VLAN 获取 DHCP 时，还需要按题目确认是否需要 `ip helper-address`。
 
 ## 验证
 
